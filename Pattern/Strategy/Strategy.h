@@ -86,7 +86,7 @@ public:
         MyStrategy = std::move(NewStrategy);
     }
 
-    float ExecutionDamage(float Damage)
+    float ExecutionDamage(float Damage) const
     {
         return MyStrategy->ExecutionDamage(Damage);
     }

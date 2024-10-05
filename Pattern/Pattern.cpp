@@ -1,10 +1,13 @@
 #include <iostream>
 #include <format>
 
+#include "Singleton/Singleton.h"
 #include "Observer/Observer.h"
 #include "Strategy/Strategy.h"
+#include "Facade/Facade.h"
+#include "FacadeAndStrategy/FacadeAndStrategy.h"
 
-class Manager
+class Manager : public Singleton<Manager>
 {
 public:
     void ObserverExample()
@@ -57,14 +60,36 @@ public:
 
         std::cout << std::format("SubtractionDamage: {}\n", MyContext.ExecutionDamage(10.0f));
     }
+
+    void FacadeExample()
+    {
+        std::unique_ptr<FirstSubsystem> MyFirstSubsystem = std::make_unique<FirstSubsystem>();
+        std::unique_ptr<SecondSubsystem> MySecondSubsystem = std::make_unique<SecondSubsystem>();
+
+        Facade MyFacade(std::move(MyFirstSubsystem), std::move(MySecondSubsystem));
+
+        std::cout << std::format("SomeOperation: {}\n", MyFacade.SomeOperation());
+    }
+
+    void FacadeAndStrategyExample()
+    {
+        CharacterFacade MyCharacter("Warrior");
+
+        MyCharacter.SetAttackStrategy(std::make_unique<SwordAttack>());
+        MyCharacter.PerformAttack("Dragon");
+
+        MyCharacter.SetAttackStrategy(std::make_unique<MagicAttack>());
+        MyCharacter.PerformAttack("Dragon");
+
+        MyCharacter.SetAttackStrategy(std::make_unique<RangeAttack>());
+        MyCharacter.PerformAttack("Dragon");
+    }
 };
 
 
 int main(int argc, char* argv[])
 {
-    Manager JustManager;
-
-    JustManager.StrategyExample();
+    Manager::GetInstance().FacadeAndStrategyExample();
 
     return 0;
 }

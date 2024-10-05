@@ -155,11 +155,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FacadeAndStrategy\FacadeAndStrategy.cpp" />
+    <ClCompile Include="Facade\Facade.cpp" />
     <ClCompile Include="Observer\Observer.cpp" />
     <ClCompile Include="Pattern.cpp" />
+    <ClCompile Include="Singleton\Singleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FacadeAndStrategy\FacadeAndStrategy.h" />
+    <ClInclude Include="Facade\Facade.h" />
     <ClInclude Include="Observer\Observer.h" />
+    <ClInclude Include="Singleton\Singleton.h" />
     <ClInclude Include="Strategy\Strategy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
